@@ -21,8 +21,9 @@ import {User} from '../models/user.js';
 
         res.json(
             {
-                total,
-                usuarios
+                
+                usuarios,
+                total
             });
     }
 
