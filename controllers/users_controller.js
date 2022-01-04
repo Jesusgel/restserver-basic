@@ -15,8 +15,7 @@ import {User} from '../models/user.js';
         // const total = await User.countDocuments({estado: true});
 
        const [total,usuarios] = await Promise.all([
-            User.find({estado: true}),
-            User.countDocuments({estado: true})
+            User.find({estado: true})
         ]);
 
         res.json(
