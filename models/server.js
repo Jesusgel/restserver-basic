@@ -2,6 +2,7 @@ import express from  'express'
 import cors from 'cors'
 
 import user from '../routes/user.js'
+import { dbConnection } from '../database/config.js';
 
 class Server{
 
@@ -10,9 +11,16 @@ class Server{
         this.port = process.env.PORT;
 
         this.usersPath = '/api/users';
-
+        
+        //Conectar a BD
+        this.conectarDB();
+        
         this.middlewares();
         this.routes();
+    }
+
+    async conectarDB(){
+        await dbConnection();
     }
 
     middlewares(){
