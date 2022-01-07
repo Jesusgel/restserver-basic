@@ -84,10 +84,12 @@ import {User} from '../models/user.js';
         const {id} = req.params;
 
         // Fisicament se borra
+
         // const usuario = await User.findByIdAndDelete(id);
-
+        
         const usuario = await User.findByIdAndUpdate(id,{estado : false});
-
+        const usuarioAutenticado= req.user;
+         
         res.json(usuario);
 
     }

@@ -2,7 +2,11 @@ import express from  'express'
 import { check } from 'express-validator';
 import { usersGet,usersPost, usersPut,usersPatch, usersDelete } from '../controllers/users_controller.js';
 import { esRoleValido, esEmailValido,existeUsuarioPorId} from '../helpers/db-validators.js';
-import { validarCampos } from '../middleware/validar_campos.js';
+// import { validarJwt } from '../middleware/validarJwt.js';
+// import { validarCampos } from '../middleware/validar_campos.js';
+// import { isAdminRole, tieneRole } from '../middleware/validar_roles.js';
+import {validarJwt,validarCampos,tieneRole} from '../middleware/index.js'
+
 const {Router} = express;
 
 
@@ -29,7 +33,11 @@ router.put('/:id',[
 ],usersPut);
 
 router.patch('/',usersPatch);
-router.delete('/:id',[  
+
+router.delete('/:id',[ 
+  validarJwt, 
+  //isAdminRole,
+  tieneRole('ADMIN_ROLE','SUPER_ROLE'),
   check('id','No es un ID válido').isMongoId(),
   check('id').custom(existeUsuarioPorId),
   validarCampos
