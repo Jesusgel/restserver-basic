@@ -30,8 +30,6 @@ import {User} from '../models/user.js';
     }
 
     const usersPost = async(req,res= response) =>{
-
-
      
             const {nombre,mail,password,role} = req.body;
             const user = new User({nombre,mail,password,role});
